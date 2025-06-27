@@ -13,6 +13,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Ejecutar mi acción compuesta
-        uses: ./.github/actions/composite_uno/c_uno.yml
+        uses: ./.github/actions/composite_uno/
         with:
           mensaje: "¡Hola, Fabian! Probando la composite action :)"
