@@ -1,0 +1,18 @@
+name: Probar acción compuesta
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  ejecutar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar mi acción compuesta
+        uses: ./.github/actions/composite_uno/c_uno.yml
+        with:
+          mensaje: "¡Hola, Fabian! Probando la composite action :)"
