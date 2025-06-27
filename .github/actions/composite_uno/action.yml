@@ -4,11 +4,14 @@ inputs:
   mensaje:
     description: Mensaje a mostrar
     required: true
+
 runs:
   using: "composite"
   steps:
     - name: Mostrar saludo
       run: echo "Hola desde la acción compuesta"
+      shell: bash
 
     - name: Mostrar mensaje
       run: echo "${{ inputs.mensaje }}"
+      shell: bash
