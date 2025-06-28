@@ -15,4 +15,4 @@ jobs:
       - name: Ejecutar mi acción compuesta
         uses: ./.github/actions/composite_uno/
         with:
-          mensaje: "¡Hola, Fabian! Probando la composite action :)"
+          mensaje: "¡Hola, Fabian! Imprimiendo desde el workflow :)"
