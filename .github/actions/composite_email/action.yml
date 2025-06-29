@@ -1,0 +1,57 @@
+name: Enviar correo
+description: Envía un correo electrónico con los datos proporcionados
+
+inputs:
+  subject:
+    description: Asunto del correo
+    required: true
+  body:
+    description: Cuerpo del correo
+    required: true
+  destination_email:
+    description: Correo de destino
+    required: true
+  smtp_user:
+    description: Usuario SMTP (correo emisor)
+    required: true
+  smtp_pass:
+    description: Contraseña SMTP
+    required: true
+  smtp_host:
+    description: Servidor SMTP
+    required: true
+  smtp_port:
+    description: Puerto SMTP
+    required: false
+    default: "587"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Instalar msmtp
+      run: sudo apt-get update && sudo apt-get install -y msmtp
+      shell: bash
+
+    - name: Configurar msmtp
+      run: |
+        cat <<EOF > ~/.msmtprc
+        defaults
+        auth           on
+        tls            on
+        tls_trust_file /etc/ssl/certs/ca-certificates.crt
+        logfile        ~/.msmtp.log
+
+        account        default
+        host           ${{ inputs.smtp_host }}
+        port           ${{ inputs.smtp_port }}
+        from           ${{ inputs.smtp_user }}
+        user           ${{ inputs.smtp_user }}
+        password       ${{ inputs.smtp_pass }}
+        EOF
+        chmod 600 ~/.msmtprc
+      shell: bash
+
+    - name: Enviar correo
+      run: |
+        echo -e "Subject: ${{ inputs.subject }}\nTo: ${{ inputs.destination_email }}\n\n${{ inputs.body }}" | msmtp ${{ inputs.destination_email }}
+      shell: bash
