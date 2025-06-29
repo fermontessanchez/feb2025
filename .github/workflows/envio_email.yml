@@ -1,0 +1,24 @@
+# .github/workflows/enviar-correo.yml
+name: Enviar correo de prueba
+
+on:
+  workflow_dispatch:  # Permite ejecutarlo manualmente desde GitHub
+
+jobs:
+  enviar-correo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Enviar correo usando el composite
+        uses: ./.github/actions/enviar-correo
+        with:
+          subject: "Correo de prueba desde GitHub Actions"
+          body: "Hola, este es un correo enviado automáticamente desde un workflow."
+          destination_email: "destinatario@ejemplo.com"
+          smtp_user: ${{ secrets.SMTP_USER }}
+          smtp_pass: ${{ secrets.SMTP_PASS }}
+          smtp_host: "smtp.ejemplo.com"
+          smtp_port: "587"
