@@ -19,7 +19,7 @@ jobs:
           body: "Hola, este es un correo enviado automáticamente desde un workflow."
           destination_email: "fabianmontes@hotmail.com"
           smtp_user: "fermontessanchez@gmail.com"
-          smtp_pass: ${{ secrets.SMTP_PASS }}
+          smtp_pass: ${{ secrets.SMTP }}
           smtp_host: "smtp.gmail.com"
           smtp_port: "587"
 
