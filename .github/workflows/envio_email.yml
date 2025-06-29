@@ -13,12 +13,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Enviar correo usando el composite
-        uses: ./.github/actions/enviar-correo
+        uses: ./.github/actions/composite_email
         with:
           subject: "Correo de prueba desde GitHub Actions"
           body: "Hola, este es un correo enviado automáticamente desde un workflow."
-          destination_email: "destinatario@ejemplo.com"
-          smtp_user: ${{ secrets.SMTP_USER }}
+          destination_email: "fabianmontes@hotmail.com"
+          smtp_user: "fermontessanchez@gmail.com"
           smtp_pass: ${{ secrets.SMTP_PASS }}
-          smtp_host: "smtp.ejemplo.com"
+          smtp_host: "smtp.gmail.com"
           smtp_port: "587"
+
