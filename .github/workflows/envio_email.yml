@@ -2,6 +2,9 @@
 name: Enviar correo de prueba
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:  # Permite ejecutarlo manualmente desde GitHub
 
 jobs:
@@ -11,6 +14,13 @@ jobs:
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 
+      - name: check repo sonarqube
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: Enviar correo usando el composite
         uses: ./.github/actions/composite_email
